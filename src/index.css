@@ -1,0 +1,44 @@
+* {
+  font-family: "Jockey One", serif;
+  border: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #2d2d2d;
+}
+
+button{
+  transition: background-color 0.5s;
+}
+
+button:hover{
+  scale: 1.05;
+  cursor: pointer;
+}
+
+/* Estilo para navegadores WebKit (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 12px; /* Ancho de la barra de desplazamiento */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Color de fondo de la pista */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4f4bff; /* Color de la barra de desplazamiento */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4f4bff; /* Color de la barra de desplazamiento al pasar el ratón por encima */
+}
+
+/* Estilo para Firefox */
+* {
+  scrollbar-width: thin; /* Ancho de la barra de desplazamiento */
+  scrollbar-color: #4f4bff transparent; /* Color de la barra de desplazamiento y de la pista */
+}

@@ -1,0 +1,114 @@
+[
+    {
+        "type": "nequi",
+        "accountNumber": "03008576228",
+        "password": "none",
+        "owner": "Julián Arias",
+        "balance": 2345540.34,
+        "status": "enabled"
+    },
+    {
+        "type": "ahorro a la mano",
+        "accountNumber": "03128370891",
+        "password": "none",
+        "owner": "Esteban Cardenas",
+        "balance": 3235678.99,
+        "status": "enabled"
+    },
+    {
+        "type": "ahorro a la mano",
+        "accountNumber": "13008576228",
+        "password": "none",
+        "owner": "Julián Arias",
+        "balance": 320000.34,
+        "status": "enabled"
+    },
+    {
+        "type": "bancolombia",
+        "accountNumber": "50445678923",
+        "password": "1234",
+        "owner": "Julián Arias",
+        "balance": 15430780.53,
+        "status": "enabled"
+    },
+    {
+        "type": "nequi",
+        "accountNumber": "030123456789",
+        "password": "none",
+        "owner": "Ana Gómez",
+        "balance": 5000000.00,
+        "status": "enabled"
+    },
+    {
+        "type": "bancolombia",
+        "accountNumber": "50412345678",
+        "password": "none",
+        "owner": "Carlos Pérez",
+        "balance": 7500000.00,
+        "status": "enabled"
+    },
+    {
+        "type": "nequi",
+        "accountNumber": "030987654321",
+        "password": "none",
+        "owner": "María López",
+        "balance": 3000000.00,
+        "status": "enabled"
+    },
+    {
+        "type": "bancolombia",
+        "accountNumber": "50498765432",
+        "password": "none",
+        "owner": "Luis Martínez",
+        "balance": 10000000.00,
+        "status": "enabled"
+    },
+    {
+        "type": "nequi",
+        "accountNumber": "030112233445",
+        "password": "none",
+        "owner": "Laura Sánchez",
+        "balance": 4500000.00,
+        "status": "enabled"
+    },
+    {
+        "type": "bancolombia",
+        "accountNumber": "50411223344",
+        "password": "none",
+        "owner": "Jorge Ramírez",
+        "balance": 8500000.00,
+        "status": "enabled"
+    },
+    {
+        "type": "nequi",
+        "accountNumber": "030556677889",
+        "password": "none",
+        "owner": "Sofía Torres",
+        "balance": 6000000.00,
+        "status": "enabled"
+    },
+    {
+        "type": "bancolombia",
+        "accountNumber": "50455667788",
+        "password": "none",
+        "owner": "Miguel Rodríguez",
+        "balance": 9500000.00,
+        "status": "enabled"
+    },
+    {
+        "type": "nequi",
+        "accountNumber": "030998877665",
+        "password": "none",
+        "owner": "Valentina Díaz",
+        "balance": 7000000.00,
+        "status": "enabled"
+    },
+    {
+        "type": "bancolombia",
+        "accountNumber": "50499887766",
+        "password": "none",
+        "owner": "Andrés Gómez",
+        "balance": 12000000.00,
+        "status": "enabled"
+    }
+]

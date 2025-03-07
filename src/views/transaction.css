@@ -1,0 +1,241 @@
+.default-money-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+}
+
+.middle-text {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.middle-text>h2 {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    font-size: 45px;
+    margin-top: 20px;
+    text-shadow: 0px 3px 5px #3e3e40;
+    letter-spacing: 0.15em;
+    color: #f1f1f1c8;
+}
+
+.phone-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.phone-form>h2 {
+    width: 50%;
+    text-align: center;
+    font-size: 45px;
+    text-shadow: 0px 3px 5px #3e3e40;
+    letter-spacing: 0.15em;
+    color: #f1f1f1c8;
+}
+
+.phone-number {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.otp-input {
+    text-align: center;
+    background-color: transparent;
+    font-size: 30px;
+    width: 5%;
+    margin: 0px 5px;
+    border: none;
+    border-radius: 10px;
+    color: #f1f1f1;
+}
+
+.otp-input:focus {
+    outline: 3px solid #4f4bff;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    /* Para Firefox */
+}
+
+.buttons {
+    width: 60% !important;
+    min-height: 100px;
+    margin: 4% 20%;
+    display: flex;
+    justify-content: center;
+    align-items: self-start !important;
+}
+
+.buttons>button {
+    margin: 0px 10px;
+    padding: 1% 3%;
+    font-size: 30px;
+    color: #f1f1f1;
+    box-shadow: 0px 2px 5px #3e3e40;
+    border-radius: 15px;
+}
+
+
+.give-money {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.give-money>h2 {
+    font-size: 40px;
+    text-align: center;
+    margin-top: 20px;
+    color: #f1f1f1;
+    text-shadow: 0px 3px 5px #3e3e40;
+    letter-spacing: 0.15em;
+}
+
+.give-money>div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.give-money>input[type=number],
+.give-money>button {
+    width: 20%;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 10px;
+    font-size: 30px;
+    padding: 5px, 3px, 3px 2px;
+    border-radius: 15px;
+    border: 2px solid #4f4bff;
+    text-align: center;
+    color: #f1f1f1;
+}
+
+.give-money>input[type=number] {
+    background-color: transparent;
+}
+
+.give-money>input[type=number]:focus,
+.give-money>button:focus {
+    outline: 3px solid #4f4bff;
+}
+
+.give-money>button {
+    background-color: #4f4bff;
+    box-shadow: 0px 2px 5px #3e3e40;
+}
+
+/* .money{
+    width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    margin-top: 20px;
+}
+*/
+
+.money {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.money>img {
+    width: 60%;
+    margin-top: -20%;
+    /* Ajusta este valor según cuánto quieres que se sobrepongan las imágenes */
+    position: relative;
+    z-index: 1;
+    /* Asegura que las imágenes se apilen correctamente */
+}
+
+.money>img:first-child {
+    margin-top: 0;
+    /* Mantiene la primera imagen en su lugar */
+}
+
+.receipt {
+    width: 40%;
+    background-color: #f1f1f1;
+    border-radius: 15px;
+    padding: 2%;
+    font-size: 22px;
+}
+
+@media screen and (max-width:500px) {
+    .phone-form>h2 {
+        width: 100%;
+        font-size: 30px;
+    }
+
+    .buttons {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        margin: 10% 5%;
+        width: 90% !important;
+    }
+
+    .default-money-options {
+        flex-direction: column;
+    }
+
+    .middle-text {
+        width: 98%;
+    }
+
+    .middle-text>h2 {
+        width: 95%;
+        font-size: 35px;
+    }
+
+    .give-money>div {
+        flex-direction: column-reverse;
+    }
+
+    .receipt {
+        margin-top: 10%;
+        width: 90%;
+    }
+
+    .give-money {
+        width: 100%;
+    }
+
+    .give-money>button,
+    .give-money>input[type="number"] {
+        width: 90%;
+    }
+
+    .money {
+        width: 95%;
+    }
+
+    .money>img {
+        width: 80%;
+        margin-top: -25%;
+    }
+}
