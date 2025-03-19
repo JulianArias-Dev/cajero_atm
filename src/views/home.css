@@ -50,14 +50,14 @@
     margin-top: 10%;
     padding: 5%;
     font-size: 30px;
-    background-color: #6C63FF;
+    background-color: #0D92F4;
     color: #f1f1f1;
     box-shadow: 0px 2px 5px #3e3e40;
     border: none;
 }
 
 .opcion>button:hover {
-    background-color: #4f4bff;
+    background-color: #47a6e9;
 }
 
 .right {

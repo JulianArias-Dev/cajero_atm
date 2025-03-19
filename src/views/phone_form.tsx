@@ -25,6 +25,33 @@ const handleInput = (event: Event) => {
     }
 };
 
+const validateAccountNumber = (account: string, type: string) => {
+
+    switch (type) {
+
+        case 'nequi':
+            if (account[0] !== '3' || account.length !== 10) {
+                throw new Error('Su cuenta de nequi debe ser un número de teléfono de 10 dígitos. El primer dígito debe ser un 3');
+            }
+            break;
+
+        case 'bancolombia':
+            if (account.length !== 11) throw new Error('Su cuenta de bancolombia debe ser de 11 dígitos');
+            break;
+
+        case 'ahorro a la mano':
+            if ((account[0] !== '0' && account[0] !== '1') || account[1] !== '3' || account.length !== 11) {
+                throw new Error('Su cuenta de ahorro a la mano debe ser de 11 dígitos. El primer dígito debe ser 0/1, mientras que el segundo debe ser 3');
+            }
+            break;
+
+        default:
+            throw new Error('Invalid argument: unexpected account type');
+    }
+
+
+}
+
 const PhoneForm = () => {
     const navigate = useNavigate();
     const { type } = useParams();
@@ -45,26 +72,30 @@ const PhoneForm = () => {
     }, []);
 
     const handleConfirm = async () => {
-        let phone: string = "";
+        let account: string = "";
         const otpInputs = document.querySelectorAll('.otp-input');
 
         otpInputs.forEach(input => {
             if (!(input as HTMLInputElement).value) {
                 Swal.fire({
                     title: 'Error!',
-                    text: 'El numero de teléfono debe ser de 10 dígitos',
+                    text: 'No puede haber espacios de dígitos sin completar',
                     icon: 'error',
                     confirmButtonText: 'Ok'
                 }).then(() => navigate('/'));
             } else {
-                phone += (input as HTMLInputElement).value;
+                account += (input as HTMLInputElement).value;
             }
         });
 
-
         try {
+            if (type) {
+                validateAccountNumber(account, type);
+            } else {
+                throw new Error('Account type is undefined');
+            }
             const controller = new AccountController();
-            const account = type === "nequi" ? `0${phone}` : phone;
+            account = type === "nequi" ? `0${account}` : account;
             if (type && await controller.getAccount(account, type)) {
                 sessionStorage.setItem('accountNumber', account);
                 sessionStorage.setItem('type', type);
@@ -85,11 +116,13 @@ const PhoneForm = () => {
             {
                 type === "bancolombia" ?
                     (<h2>Ingrese el número de su tarjeta</h2>)
-                    :
-                    (<h2>Ingrese su numero telefónico de 10 dígitos</h2>)
+                    : type === 'ahorro a la mano' ?
+                        (<h2>Ingrese su numero cuenta de de 11 dígitos</h2>)
+                        :
+                        (<h2>Ingrese su numero telefónico de 10 dígitos</h2>)
             }
             <div className="phone-number">
-                {[...Array(type === "bancolombia" ? 11 : 10)].map((_, index) => (
+                {[...Array(type === "nequi" ? 10 : 11)].map((_, index) => (
                     <input
                         key={index}
                         type="number"

@@ -9,15 +9,17 @@ const handleInput = (event: Event) => {
     const next = input.nextElementSibling as HTMLInputElement | null;
     const prev = input.previousElementSibling as HTMLInputElement | null;
 
-    let currentValue = input.value;
-    currentValue = currentValue.replace(/[^0-9]/g, '');
+    let currentValue = input.value.replace(/[^0-9]/g, '');
 
     if (currentValue.length > 1) {
         currentValue = currentValue.slice(0, 1);
     }
 
-    input.value = currentValue;
+    input.dataset.realValue = currentValue;
 
+    input.value = currentValue ? 'X' : '';
+
+    // Manejo de navegación con teclas
     if (event instanceof KeyboardEvent && event.key === 'Backspace' && currentValue.length === 0 && prev) {
         prev.focus();
     } else if (next && currentValue.length === 1) {
@@ -82,18 +84,19 @@ const CodeForm = () => {
         const otpInputs = document.querySelectorAll('.otp-input');
 
         otpInputs.forEach(input => {
-            if (!(input as HTMLInputElement).value) {
+            const realValue = (input as HTMLInputElement).dataset.realValue;
+            if (!realValue) {
                 Swal.fire({
                     title: 'Error!',
-                    text: sessionStorage.getItem("type") === "bancolombia" ? 'El codigo debe ser de 4 dígitos' : 'El codigo debe ser de 6 dígitos',
+                    text: sessionStorage.getItem("type") === "bancolombia" ? 'El código debe ser de 4 dígitos' : 'El código debe ser de 6 dígitos',
                     icon: 'error',
                     confirmButtonText: 'Ok'
                 }).then(() => {
                     navigate('/');
                 });
-            } else {
-                enterCode += (input as HTMLInputElement).value;
+                return;
             }
+            enterCode += realValue;
         });
 
         let isValid: boolean = false;
@@ -137,6 +140,11 @@ const CodeForm = () => {
         }
     }
 
+    const finalizar = () => {
+        sessionStorage.clear();
+        navigate('/')
+    }
+
     return (
         <div className="phone-form">
             {
@@ -149,7 +157,7 @@ const CodeForm = () => {
                 {[...Array(sessionStorage.getItem("type") !== "bancolombia" ? 6 : 4)].map((_, index) => (
                     <input
                         key={index}
-                        type="number"
+                        type="text"
                         className="otp-input"
                         maxLength={1}
                         placeholder="__"
@@ -158,7 +166,7 @@ const CodeForm = () => {
             </div>
             <div className="buttons">
                 <button onClick={() => handleConfirm()} style={{ background: "Green" }}>Confirmar</button>
-                <button style={{ background: "Red" }}>Cancelar</button>
+                <button onClick={() => finalizar()} style={{ background: "Red" }}>Cancelar</button>
             </div>
         </div>
     );

@@ -102,10 +102,10 @@ const GiveMoney = () => {
                     text: (error as Error).message,
                     icon: 'error',
                     confirmButtonText: 'Ok'
-                });
+                }).then(() => navigate('/'));
             }
         }
-    }, [account, amount, retirar]);
+    }, [account, amount, retirar, navigate]);
 
     const finalizar = () => {
         sessionStorage.clear();
@@ -134,9 +134,10 @@ const GiveMoney = () => {
                     account &&
                     (
                         <div className="receipt">
-                            <p>Retiro: {account.type}</p>
                             <p>Fecha: {formatDate(new Date())}</p>
+                            <p>Cuenta: {account.accountNumber}</p>
                             <p>Titular: {account.owner}</p>
+                            <p>Retiro: {account.type.toUpperCase()}</p>
                             <p>Nuevo saldo: $ {formatNumber(account.balance)}</p>
                             <p>Valor retirado: $ {formatNumber(amount!)}</p>
                         </div>
