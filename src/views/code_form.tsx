@@ -4,7 +4,7 @@ import './transaction.css';
 import Swal from 'sweetalert2';
 import AccountController from '../controllers/account_controller';
 
-const handleInput = (event: Event) => {
+function handleInput(event: Event) {
     const input = event.target as HTMLInputElement;
     const next = input.nextElementSibling as HTMLInputElement | null;
     const prev = input.previousElementSibling as HTMLInputElement | null;
@@ -19,7 +19,6 @@ const handleInput = (event: Event) => {
 
     input.value = currentValue ? 'X' : '';
 
-    // Manejo de navegación con teclas
     if (event instanceof KeyboardEvent && event.key === 'Backspace' && currentValue.length === 0 && prev) {
         prev.focus();
     } else if (next && currentValue.length === 1) {
@@ -71,8 +70,8 @@ const CodeForm = () => {
     useEffect(() => {
         if (validationCode.length > 0) {
             Swal.fire({
-                title: 'Código de verificación',
-                text: `Su código es: ${validationCode}`,
+                title: `Código:  ${validationCode}`,
+                text: `Este es su codigo de verificación. No lo comparta con nadie`,
                 icon: 'info',
                 confirmButtonText: 'Ok'
             });
@@ -80,58 +79,51 @@ const CodeForm = () => {
     }, [validationCode]);
 
     const handleConfirm = async () => {
-        let enterCode: string = "";
-        const otpInputs = document.querySelectorAll('.otp-input');
+        try {
+            let enterCode: string = "";
+            const otpInputs = document.querySelectorAll('.otp-input');
 
-        otpInputs.forEach(input => {
-            const realValue = (input as HTMLInputElement).dataset.realValue;
-            if (!realValue) {
-                Swal.fire({
-                    title: 'Error!',
-                    text: sessionStorage.getItem("type") === "bancolombia" ? 'El código debe ser de 4 dígitos' : 'El código debe ser de 6 dígitos',
-                    icon: 'error',
-                    confirmButtonText: 'Ok'
-                }).then(() => {
-                    navigate('/');
-                });
-                return;
-            }
-            enterCode += realValue;
-        });
+            otpInputs.forEach(input => {
+                const realValue = (input as HTMLInputElement).dataset.realValue;
+                if (!realValue)
+                    throw new Error(sessionStorage.getItem("type") === "bancolombia" ? 'El código debe ser de 4 dígitos' : 'El código debe ser de 6 dígitos');
 
-        let isValid: boolean = false;
-        if (sessionStorage.getItem("type") === "bancolombia") {
-            const controller = new AccountController();
-            const account = sessionStorage.getItem('accountNumber') ?? "";
-            try {
-                isValid = await controller.validatePassword(account, enterCode);
-            } catch (error) {
-                Swal.fire({
-                    title: 'Error!',
-                    text: (error as Error).message,
-                    icon: 'error',
-                    confirmButtonText: 'Ok'
-                }).then(() => {
-                    navigate('/');
-                });
-            }
-        } else {
-            isValid = validationCode === enterCode ? true : false;
-        }
-
-        if (isValid) {
-            Swal.fire({
-                title: 'Código correcto',
-                text: 'El código ingresado es correcto',
-                icon: 'success',
-                confirmButtonText: 'Ok'
-            }).then(() => {
-                navigate('/money');
+                enterCode += realValue;
             });
-        } else {
+
+            let isValid: boolean = false;
+            if (sessionStorage.getItem("type") === "bancolombia") {
+                const controller = new AccountController();
+                const account = sessionStorage.getItem('accountNumber') ?? "";
+                isValid = await controller.validatePassword(account, enterCode);
+            } else {
+                isValid = validationCode === enterCode ? true : false;
+            }
+
+            if (isValid) {
+                Swal.fire({
+                    title: 'Código correcto',
+                    text: 'El código ingresado es correcto',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                }).then(() => {
+                    navigate('/money');
+                });
+            } else {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'El código ingresado es incorrecto',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                }).then(() => {
+                    navigate('/');
+                });
+            }
+        }
+        catch (error) {
             Swal.fire({
                 title: 'Error!',
-                text: 'El código ingresado es incorrecto',
+                text: (error as Error).message,
                 icon: 'error',
                 confirmButtonText: 'Ok'
             }).then(() => {

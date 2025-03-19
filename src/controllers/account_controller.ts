@@ -32,14 +32,8 @@ export default class AccountController {
             throw new Error('No hay cuentas disponibles para buscar.');
         }
 
-        const numAccount = type === "ahorro a la mano" ? `0${account}` : account;
-        let element = this.accounts.find(acc => (acc.accountNumber === numAccount && acc.type === type));
-
-        if (!element && type == "ahorro a la mano") {
-            account = `1${account}`;
-            element = this.accounts.find(acc => (acc.accountNumber === account && acc.type === type));
-        }
-
+        const element = this.accounts.find(acc => (acc.accountNumber === account && acc.type === type));
+        
         if (element)
             return element;
 
